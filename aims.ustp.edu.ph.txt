@@ -1,0 +1,3 @@
+https://aoms.ustp.edu.ph/app/
+username: johnirwin.fabela@ustp.edu.ph
+password: password
