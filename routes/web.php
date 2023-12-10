@@ -48,8 +48,10 @@ Route::post('/parameter/update', [Parameters::class, 'update_parameter'])->name(
 
 /* Statement */
 Route::post('/statement/save', [Statements::class, 'new_statement'])->name('save.statement');
+Route::post('/statement/psv/save', [Statements::class, 'new_psv_statement'])->name('save.psv.statement');
 Route::post('/statement/sub/save', [Statements::class, 'new_sub_statement'])->name('save.sub.statement');
 Route::post('/statement/sub/update', [Statements::class, 'update_sub_statement'])->name('update.sub.statement');
+Route::post('/statement/psv/update', [Statements::class, 'update_psv_statement'])->name('update.psv.statement');
 Route::post('/statement/update', [Statements::class, 'update_statement'])->name('update.statement');
 
 Route::get('/program/list', [Programs::class, 'list']);

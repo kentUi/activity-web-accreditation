@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Parameter;
 use App\Models\Instrument;
 use App\Models\InstrumentSublist;
+use App\Models\InstrumentSub;
 use App\Models\Statement;
 use App\Models\Area;
 
@@ -70,6 +71,21 @@ Route::post('/statement/sub/remove', function(Request $request){
 Route::post('/statement/sub/details', function(Request $request){
     $instrumentId = $request->input('id');
     return InstrumentSublist::where('ins_id', $instrumentId)->first();
+});
+
+Route::post('/statement/psv/remove', function(Request $request){
+    $instrumentId = $request->input('id');
+    InstrumentSub::where('ins_id', $instrumentId)->delete();
+});
+Route::post('/statement/psv/details', function(Request $request){
+    $instrumentId = $request->input('id');
+
+    $result = InstrumentSub::select('t_areas.ins_text as area', 't_instruments_sub.ins_text as statement', 't_areas.ins_id as id')
+        ->where('t_instruments_sub.ins_id', $instrumentId)
+        ->join('t_areas', 't_areas.ins_id', 't_instruments_sub.ins_parentid')
+        ->first();
+    
+    return $result;
 });
 
 

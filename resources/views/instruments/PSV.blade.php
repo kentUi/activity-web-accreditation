@@ -44,15 +44,15 @@
                                                     @php
                                                         use App\Models\InstrumentSublist;
                                                     @endphp
-                                                    <div class="card-inner">                                                        
+                                                    <div class="card-inner">
                                                         <a style="float: right;"
-                                                            onclick="parent_statement('{{$area->ins_text}}')"
+                                                            onclick="parent_statement('{{ $area->ins_text }}')"
                                                             class="btn btn-light" href="#create-statement"
                                                             data-bs-toggle="modal">
                                                             <em class="icon ni ni-plus"></em>
                                                             <span>Add Statement</span>
                                                         </a>
-                                                        <h4>{{$area->ins_text}}</h4>
+                                                        <h4>{{ $area->ins_text }}</h4>
                                                         <hr>
 
                                                         <table class="table table-bordered">
@@ -165,8 +165,9 @@
                         <label class="form-label">Parent Directory :
                         </label>
                         <input name="inp_parent" id="inp_parent" type="text" class="form-control" readonly
-                            style="letter-spacing: 1px;" value="{{$area->ins_text}}">
+                            style="letter-spacing: 1px;" value="{{ $area->ins_text }}">
                         <input type="hidden" value="{{ $area_id }}" name="_KpT2QrXsYzLmN7" id="_PbW3ZsYqL5RvH9">
+                        <input type="hidden" name="_statement_D74XWb" id="_statement_D74XWb">
                         <label class="form-label mt-2">Statement Detail :
                         </label>
                         <input name="inp_statement" id="inp_statement" type="text" class="form-control"
@@ -218,16 +219,28 @@
 
     @php
         $url_statement = route('update.statement');
+        $url_psv_statement = route('update.psv.statement');
         $url_sub_statement = route('update.sub.statement');
     @endphp
-    @if (isset($_GET['statement-updated']))
+    @if (isset($_GET['s']))
+        <script>
+            Swal.fire(
+                'New Statement Added',
+                'The new statement has been added!',
+                'success'
+            ).then(() => {
+                window.location.href = '/instrument/psv/{{ $area_id }}';
+            })
+        </script>
+    @endif
+    @if (isset($_GET['u']))
         <script>
             Swal.fire(
                 'Successfully Updated',
                 'The updated statement has been applied!',
                 'success'
             ).then(() => {
-                window.location.href = '/instrument/statement/{{ $area_id }}';
+                window.location.href = '/instrument/psv/{{ $area_id }}';
             })
         </script>
     @endif
@@ -295,25 +308,27 @@
             var form = document.getElementById('statement_panel');
             var form_parent = document.getElementById('inp_parent');
             var form_header = document.getElementById('form_header_statement');
-            var form_id = document.getElementById('__A7KQe3RTtyZFc90');
+            var form_id = document.getElementById('_PbW3ZsYqL5RvH9');
+            var form_areax = document.getElementById('_statement_D74XWb');
 
             var form_area = document.getElementById('inp_statement');
 
-            var url = "{{ $url_statement }}";
+            var url = "{{ $url_psv_statement }}";
             form_id.value = id;
             form_header.innerHTML = 'Update Statement';
             form.action = url;
 
             $.ajax({
-                url: '/api/statement/details',
+                url: '/api/statement/psv/details',
                 type: 'POST',
                 data: {
                     'id': id
                 },
                 success: function(resp) {
                     console.log(resp);
-                    form_parent.value = resp['st_type'];
-                    form_area.value = resp['st_text'];
+                    form_parent.value = resp['area'];
+                    form_area.value = resp['statement'];
+                    form_areax.value = resp['id'];
                 }
             })
         }
@@ -330,7 +345,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/api/statement/remove',
+                        url: '/api/statement/psv/remove',
                         type: 'POST',
                         data: {
                             'id': id
@@ -341,7 +356,7 @@
                                 'Your file has been deleted.',
                                 'success'
                             ).then((result) => {
-                                window.location.href = '/instrument/statement/{{ $area_id }}';
+                                window.location.href = '/instrument/psv/{{ $area_id }}';
                             });
                         }
                     })

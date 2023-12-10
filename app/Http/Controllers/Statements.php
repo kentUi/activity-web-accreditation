@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Statement;
 use App\Models\InstrumentSublist;
+use App\Models\InstrumentSub;
 
 class Statements extends Controller
 {
@@ -23,6 +24,26 @@ class Statements extends Controller
             'st_type' =>  $request->input('inp_parent'),
         ]);
         return redirect('/instrument/statement/'.$instrumend_id.'/' . $area_id . '/'.$paramter_id.'?statement-success');
+    }
+
+    
+    public static function new_psv_statement(Request $request){
+        $id = $request->input('_KpT2QrXsYzLmN7');
+        InstrumentSub::create([
+            'ins_text' => $request->input('inp_statement'),
+            'ins_parentid' => $request->input('_KpT2QrXsYzLmN7'),
+            'ins_level' => 0,
+        ]);
+        return redirect('/instrument/psv/'.$id.'?s');
+    }
+
+    public static function update_psv_statement(Request $request){
+        $id = $request->input('_KpT2QrXsYzLmN7');
+        $area= $request->input('_statement_D74XWb');
+        InstrumentSub::where('ins_id', $id)->update([
+            'ins_text' => $request->input('inp_statement')
+        ]);
+        return redirect('/instrument/psv/'.$area.'?u');
     }
 
     public static function update_statement(Request $request){    
