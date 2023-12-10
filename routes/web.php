@@ -9,7 +9,9 @@ use App\Http\Controllers\Member;
 use App\Http\Controllers\Folders;
 use App\Http\Controllers\Files;
 use App\Http\Controllers\Areas;
+use App\Http\Controllers\Parameters;
 use App\Http\Controllers\Instruments;
+use App\Http\Controllers\Statements;
 
 use App\Http\Controllers\Programs;
 /*
@@ -31,8 +33,24 @@ Route::get('/instruments', [Instruments::class, 'index']);
 Route::post('/instrument/save', [Instruments::class, 'new_instrument'])->name('save.instrument');
 Route::post('/instrument/update', [Instruments::class, 'update_instrument'])->name('update.instrument');
 
+Route::get('/instrument/psv/{id}', [Instruments::class, 'psv']);
+Route::get('/instrument/policy/{id}', [Instruments::class, 'policy']);
+Route::get('/instrument/parameter/{instrument}/{area}', [Instruments::class, 'parameters']);
+Route::get('/instrument/statement/{instrument}/{area}/{parameter}', [Instruments::class, 'statements']);
+
 /* Area */
 Route::post('/area/save', [Areas::class, 'new_area'])->name('save.area');
+Route::post('/area/update', [Areas::class, 'update_area'])->name('update.area');
+
+/* Parameters */
+Route::post('/parameter/save', [Parameters::class, 'new_parameter'])->name('save.parameters');
+Route::post('/parameter/update', [Parameters::class, 'update_parameter'])->name('update.parameter');
+
+/* Statement */
+Route::post('/statement/save', [Statements::class, 'new_statement'])->name('save.statement');
+Route::post('/statement/sub/save', [Statements::class, 'new_sub_statement'])->name('save.sub.statement');
+Route::post('/statement/sub/update', [Statements::class, 'update_sub_statement'])->name('update.sub.statement');
+Route::post('/statement/update', [Statements::class, 'update_statement'])->name('update.statement');
 
 Route::get('/program/list', [Programs::class, 'list']);
 Route::get('/program/create', [Programs::class, 'create']);

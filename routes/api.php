@@ -2,7 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Parameter;
 use App\Models\Instrument;
+use App\Models\InstrumentSublist;
+use App\Models\Statement;
+use App\Models\Area;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +32,45 @@ Route::post('/instrument/details', function(Request $request){
     $instrumentId = $request->input('id');
     return Instrument::where('ins_id', $instrumentId)->first();
 });
+
+/* Area */
+Route::post('/area/remove', function(Request $request){
+    $instrumentId = $request->input('id');
+    Area::where('ins_id', $instrumentId)->delete();
+});
+Route::post('/area/details', function(Request $request){
+    $instrumentId = $request->input('id');
+    return Area::where('ins_id', $instrumentId)->first();
+});
+
+/* Parameters */
+Route::post('/parameter/remove', function(Request $request){
+    $instrumentId = $request->input('id');
+    Parameter::where('param_id', $instrumentId)->delete();
+});
+Route::post('/parameter/details', function(Request $request){
+    $instrumentId = $request->input('id');
+    return Parameter::where('param_id', $instrumentId)->first();
+});
+
+/* Statement */
+Route::post('/statement/remove', function(Request $request){
+    $instrumentId = $request->input('id');
+    Statement::where('st_id', $instrumentId)->delete();
+});
+Route::post('/statement/details', function(Request $request){
+    $instrumentId = $request->input('id');
+    return Statement::where('st_id', $instrumentId)->first();
+});
+
+Route::post('/statement/sub/remove', function(Request $request){
+    $instrumentId = $request->input('id');
+    InstrumentSublist::where('ins_id', $instrumentId)->delete();
+});
+Route::post('/statement/sub/details', function(Request $request){
+    $instrumentId = $request->input('id');
+    return InstrumentSublist::where('ins_id', $instrumentId)->first();
+});
+
+
 

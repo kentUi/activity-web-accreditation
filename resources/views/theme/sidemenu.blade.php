@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nk-fmg-menu-item" href="/instruments/area">
+                    <a class="nk-fmg-menu-item" href="/instruments">
                         <em class="icon ni ni-inbox text-white"></em>
                         <span class="nk-fmg-menu-text text-menu">Manage Instruments</span>
                     </a>

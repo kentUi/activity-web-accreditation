@@ -135,7 +135,7 @@
                                                                                                     class="link-list-opt no-bdr">
                                                                                                     <li>
                                                                                                         <a
-                                                                                                            href="javascript:void(0)">
+                                                                                                            href="/instrument/psv/{{ $rw->ins_id }}">
                                                                                                             <em
                                                                                                                 class="icon ni ni-eye"></em>
                                                                                                             <span> View
@@ -143,16 +143,22 @@
                                                                                                         </a>
                                                                                                     </li>
                                                                                                     @if ($rw->ins_code == null)
-                                                                                                        <li>
-                                                                                                            <a
-                                                                                                                href="javascript:void(0)">
-                                                                                                                <em
-                                                                                                                    class="icon ni ni-trash"></em>
-                                                                                                                <span>
-                                                                                                                    Remove
-                                                                                                                    Area</span>
-                                                                                                            </a>
-                                                                                                        </li>
+                                                                                                    <li>
+                                                                                                        <a onclick="edit_area({{ $rw->ins_id }})"
+                                                                                                        href="#create-area"
+                                                                                                        data-bs-toggle="modal">
+                                                                                                        <em
+                                                                                                            class="icon ni ni-edit"></em>
+                                                                                                            <span>Edit
+                                                                                                            Instruments</span>
+                                                                                                        </a>
+                                                                                                </li>
+                                                                                                    <a onclick="remove_area({{ $rw->ins_id }})"
+                                                                                                        href="javascript:void(0)">
+                                                                                                        <em
+                                                                                                            class="icon ni ni-trash"></em><span>Remove
+                                                                                                            Instrument</span>
+                                                                                                    </a>
                                                                                                     @endif
                                                                                                 </ul>
                                                                                             </div>
@@ -246,7 +252,7 @@
                                                                                                                 Instruments</span></a>
                                                                                                     </li>
                                                                                                     <li><a
-                                                                                                            href="javascript:void(0)"><em
+                                                                                                            href="/instrument/policy/{{$item->ins_id}}"><em
                                                                                                                 class="icon ni ni-eye"></em><span>View
                                                                                                                 Instruments</span></a>
                                                                                                     </li>
@@ -286,7 +292,7 @@
         </div>
     </div>
 
-    @include('instruments.script');
+    @include('instruments.parameters-script');
 
     <script src="/assets/js/bundle.js?ver=3.0.3"></script>
     <script src="/assets/js/scripts.js?ver=3.0.3"></script>
