@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Applications;
+
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Member;
 use App\Http\Controllers\Folders;
 use App\Http\Controllers\Files;
+use App\Http\Controllers\Areas;
 use App\Http\Controllers\Instruments;
 
 use App\Http\Controllers\Programs;
@@ -19,6 +22,17 @@ use App\Http\Controllers\Programs;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/* Applications */
+Route::get('/applications', [Applications::class, 'index']);
+
+/* Instruments */
+Route::get('/instruments', [Instruments::class, 'index']);
+Route::post('/instrument/save', [Instruments::class, 'new_instrument'])->name('save.instrument');
+Route::post('/instrument/update', [Instruments::class, 'update_instrument'])->name('update.instrument');
+
+/* Area */
+Route::post('/area/save', [Areas::class, 'new_area'])->name('save.area');
 
 Route::get('/program/list', [Programs::class, 'list']);
 Route::get('/program/create', [Programs::class, 'create']);

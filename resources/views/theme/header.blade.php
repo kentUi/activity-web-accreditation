@@ -11,6 +11,7 @@
     <link id="skin-default" rel="stylesheet" href="./assets/css/theme.css?ver=3.0.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter&family=Kaushan+Script&display=swap"
         rel="stylesheet">

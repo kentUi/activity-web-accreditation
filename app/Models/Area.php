@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     use HasFactory;
-    protected $table = 't_instruments';
+    protected $table = 't_areas';
     protected $primaryKey = 'ins_id';
-    protected $fillable = ['ins_id', 'ins_text'];
+    protected $fillable = ['ins_id', 'ins_text', 'ins_code'];
 }

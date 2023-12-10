@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nk-fmg-menu-item" href="#">
+                    <a class="nk-fmg-menu-item" href="/applications">
                         <em class="icon ni ni-folder text-white"></em>
                         <span class="nk-fmg-menu-text text-menu">Manage Application</span>
                     </a>

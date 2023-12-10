@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Instrument;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* Instruments */
+Route::post('/instrument/remove', function(Request $request){
+    $instrumentId = $request->input('id');
+    Instrument::find($instrumentId)->delete();
+});
+Route::post('/instrument/details', function(Request $request){
+    $instrumentId = $request->input('id');
+    return Instrument::where('ins_id', $instrumentId)->first();
+});
+
